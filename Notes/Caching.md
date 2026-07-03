@@ -22,16 +22,6 @@
 ---
 
 # Caching — Deep-Dive System Design Notes
-### For Product-Based Company Interviews | Beginner → Advanced
-
----
-
-> **How to use these notes:** Same structure as the Networking Fundamentals,
-> Scalability & Load Balancing, and Databases & Storage guides.
-> What is it → Why does it exist → How it works step by step → Diagrams → Internals
-> → Tradeoffs → Real-world → Failures → Interview tips.
-> Every concept is explained from scratch — no prior caching knowledge assumed.
-
 ---
 
 # TOPIC 1: Cache Strategies (Cache-Aside, Read-Through, Write-Through, Write-Behind, Write-Around)
