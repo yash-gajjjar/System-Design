@@ -10,18 +10,6 @@
 
 ---
 
-# DevOps & Infrastructure — Deep-Dive System Design Notes
-### For Product-Based Company Interviews | Beginner → Advanced
-
----
-
-> **How to use these notes:** Same structure as all previous guides.
-> What is it → Why does it exist → How it works step by step → Diagrams → Internals
-> → Tradeoffs → Real-world → Failures → Interview tips.
-> Every concept is explained from scratch — no prior DevOps knowledge assumed.
-
----
-
 # TOPIC 1: Containers & Kubernetes
 
 ---
