@@ -1,12 +1,4 @@
 # DevOps & Infrastructure — Complete Deep-Dive Revision Guide
-## System Design Interview Preparation | Product-Based Companies
-
----
-
-**Prepared for:** Yash | AI/GenAI Engineer transitioning to Product Company System Design Interviews
-**Coverage:** Containers & Kubernetes · CI/CD & Blue-Green Deployments · Monitoring, Logging & Distributed Tracing · AWS Core Services (S3, EC2, RDS, SQS)
-
----
 
 ## Table of Contents
 
