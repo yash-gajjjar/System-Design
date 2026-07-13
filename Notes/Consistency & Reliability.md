@@ -3,11 +3,6 @@
 
 ---
 
-**Prepared for:** Yash | AI/GenAI Engineer transitioning to Product Company System Design Interviews
-**Coverage:** Consistency Models · Availability vs Consistency · Fault Tolerance · Distributed Transactions · Idempotency · SLA/SLO/SLI · Chaos Engineering
-
----
-
 ## Table of Contents
 
 1. **Consistency Models** — Linearizability, sequential, causal, eventual consistency, vector clocks, CRDTs
@@ -18,18 +13,6 @@
 6. **SLA / SLO / SLI** — Definitions, error budgets, golden signals, rolling vs calendar windows, burn rate alerts
 7. **Chaos Engineering** — Principles, experiment process, Chaos Monkey, Gremlin, Game Days
 8. **Appendix** — Cross-topic reference, complete reliability architecture, BFSI-specific tips, five resilience patterns
-
----
-
-# Consistency & Reliability — Deep-Dive System Design Notes
-### For Product-Based Company Interviews | Beginner → Advanced
-
----
-
-> **How to use these notes:** Same structure as all previous guides.
-> What is it → Why does it exist → How it works step by step → Diagrams → Internals
-> → Tradeoffs → Real-world → Failures → Interview tips.
-> Every concept is explained from scratch — no prior distributed systems knowledge assumed.
 
 ---
 
