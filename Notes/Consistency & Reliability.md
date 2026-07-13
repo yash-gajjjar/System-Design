@@ -1,5 +1,4 @@
 # Consistency & Reliability — Complete Deep-Dive Revision Guide
-## System Design Interview Preparation | Product-Based Companies
 
 ---
 
