@@ -1,12 +1,4 @@
 # Messaging & Event Streaming — Complete Deep-Dive Revision Guide
-## System Design Interview Preparation | Product-Based Companies
-
----
-
-**Prepared for:** Yash | AI/GenAI Engineer transitioning to Product Company System Design Interviews
-**Coverage:** Message Queues · Kafka · Event-Driven Architecture · Pub/Sub Pattern · Dead Letter Queues · Stream Processing
-
----
 
 ## Table of Contents
 
@@ -17,18 +9,6 @@
 5. **Dead Letter Queues** — Poison messages, DLQ mechanics, replay patterns, Kafka retry topics
 6. **Stream Processing** — Windows, watermarks, stateful processing, Flink, Kafka Streams, Lambda vs Kappa
 7. **Appendix** — Cross-topic reference, complete messaging architecture, tool selection guide, study tips
-
----
-
-# Messaging & Event Streaming — Deep-Dive System Design Notes
-### For Product-Based Company Interviews | Beginner → Advanced
-
----
-
-> **How to use these notes:** Same structure as all previous guides.
-> What is it → Why does it exist → How it works step by step → Diagrams → Internals
-> → Tradeoffs → Real-world → Failures → Interview tips.
-> Every concept is explained from scratch — no prior messaging knowledge assumed.
 
 ---
 
