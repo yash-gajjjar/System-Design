@@ -1,10 +1,4 @@
 # Algorithms & Patterns in System Design — Complete Deep-Dive Revision Guide
-## System Design Interview Preparation | Product-Based Companies
-
----
-
-**Prepared for:** Yash | AI/GenAI Engineer transitioning to Product Company System Design Interviews
-**Coverage:** Unique ID Generation · Bloom Filters · Consistent Hashing Algorithm · Top-K / Heavy Hitters · Merkle Trees · Geohash / Quadtree
 
 ---
 
@@ -17,18 +11,6 @@
 5. **Merkle Trees** — Bottom-up construction, O(log N) divergence detection, Merkle proofs, Cassandra repair, blockchain
 6. **Geohash / Quadtree** — Geohash encoding, 9-cell boundary queries, Quadtree construction, proximity queries, Uber pattern
 7. **Appendix** — Cross-topic reference, algorithm-to-system mapping, BFSI tips, what to draw from memory
-
----
-
-# Algorithms & Patterns in System Design — Deep-Dive Notes
-### For Product-Based Company Interviews | Beginner → Advanced
-
----
-
-> **How to use these notes:** Same structure as all previous guides.
-> What is it → Why does it exist → How it works step by step → Diagrams → Internals
-> → Tradeoffs → Real-world → Failures → Interview tips.
-> Every concept is explained from scratch — no prior algorithm knowledge assumed.
 
 ---
 
