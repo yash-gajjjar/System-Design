@@ -168,26 +168,6 @@ NoSQL (Document Model):
 
 ---
 
-## 8. Common Interview Questions
-
-1. "Why did you choose SQL here? Why not just use DynamoDB?"
-2. "Your SQL database is becoming a bottleneck. What do you do?"
-3. "What happens if you need to add a column to a 1 billion row table?"
-4. "How do you handle transactions in NoSQL?"
-5. "If you chose MongoDB, what happens when you need a complex JOIN?"
-6. "What's the performance difference between a SQL JOIN and a NoSQL embedded document?"
-7. "Your startup just got 100x traffic overnight. How does your SQL database hold up?"
-8. "Why don't you just use a single NoSQL database for everything?"
-9. "What's the problem with denormalized data when something changes?"
-10. "How do you do reporting and analytics on a NoSQL database?"
-11. "What does 'eventual consistency' actually mean for end users?"
-12. "When would you use both SQL and NoSQL in the same system (polyglot persistence)?"
-13. "How does your choice between SQL and NoSQL affect your backup and recovery strategy?"
-14. "What happens to your NoSQL system if one node fails during a write?"
-15. "Can you explain a real example where NoSQL caused problems because of its lack of transactions?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "Your SQL database is becoming a bottleneck. Walk me through what you'd do."**
@@ -208,16 +188,6 @@ NoSQL (Document Model):
 - **Not considering the transaction boundary** — moving to NoSQL breaks transactions you were implicitly relying on
 - **Over-normalizing in SQL** when denormalization for read performance is appropriate
 - **Under-estimating operational cost** of self-managed NoSQL clusters
-
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "DynamoDB is AP by default. How does that affect your checkout flow if inventory is in DynamoDB?"
-- **Uber:** "Driver locations update 4 times per second per driver. We have 5 million drivers. How do you store this in SQL?"
-- **Meta:** "Your social graph has 3 billion users. How do you represent a 'friend-of-friend' query in SQL vs NoSQL?"
-- **Google:** "You're building Google Docs. Multiple users edit the same document simultaneously. SQL transaction or NoSQL CRDT?"
-- **Netflix:** "Viewing history for 250 million users. Each user watches 100+ titles/year. 25 billion rows. SQL or Cassandra? Defend your choice."
 
 ---
 
@@ -407,26 +377,6 @@ The choice only matters WHEN something breaks.
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're designing a payment system. Where do you land on CAP? CP or AP?"
-2. "What does 'eventual consistency' actually mean in practice for a user?"
-3. "Can you give an example where choosing AP caused a real problem?"
-4. "DynamoDB is AP by default. How do you make payments safe on DynamoDB?"
-5. "What is 'quorum' and how does it let you tune between CP and AP in Cassandra?"
-6. "Explain a partition. How often do partitions actually happen?"
-7. "If your CP system goes down during a partition, how do you handle it in the application layer?"
-8. "Can the same system be CP for some operations and AP for others?"
-9. "What's the difference between consistency in CAP and consistency in ACID?"
-10. "How does multi-region deployment change your CAP position?"
-11. "Zookeeper is CP. If the Zookeeper cluster loses quorum, what happens?"
-12. "What is PACELC and how does it extend CAP theorem?"
-13. "You chose AP. Now an item shows as 'in stock' when it isn't. What do you do?"
-14. "How does your choice of replication type (synchronous vs asynchronous) relate to CAP?"
-15. "Netflix operates globally. Where does it land on CAP for its viewing service?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "Your payment service is AP. A customer charges twice because of a stale read. How do you prevent this?"**
@@ -447,15 +397,6 @@ The choice only matters WHEN something breaks.
 - **Not considering how often partitions actually happen** — They're more common than people think (network blips, rolling restarts, AZ issues)
 - **Applying CP/AP at a system level** — The same system can be CP for critical operations (payment processing) and AP for others (analytics)
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "You're designing Amazon's shopping cart. Why did Dynamo choose AP? What conflict resolution strategy does it use?"
-- **Uber:** "Uber surge pricing needs to be consistent — if two users in the same area see different surge prices, is that a CP or AP problem?"
-- **Meta:** "You're designing the 'like count' system for Facebook. 1.5 billion likes/day. CP or AP? What's the consistency model?"
-- **Google:** "Spanner claims to be a globally consistent database. How does it avoid the CAP theorem — or does it?"
-- **Netflix:** "Netflix operates from multiple AWS regions. What happens to Cassandra reads during an inter-region partition?"
 
 ---
 
@@ -642,21 +583,6 @@ Read from Replica at t+50ms: might still return old value ← stale read window
 
 ---
 
-## 8. Common Interview Questions
-
-1. "Your system uses eventual consistency. A user changes their password. Is it safe to use eventual consistency here?"
-2. "How do you implement 'read your own writes' consistency in an eventually consistent system?"
-3. "What is a 'stale read' and what real harm can it cause?"
-4. "Cassandra has tunable consistency. Walk me through how you'd tune it."
-5. "What is a CRDT and how does it help with eventual consistency?"
-6. "What happens in an eventually consistent system when two nodes receive conflicting writes?"
-7. "How does DNS use eventual consistency and why is that acceptable?"
-8. "If I do a write and then immediately do a read from a different replica, can I get the old value? How do I prevent this?"
-9. "What is 'monotonic reads' consistency?"
-10. "For a social media post's like count, what's the worst case for eventual consistency? Is it acceptable?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "User changes password. You're using eventual consistency. Is this safe?"**
@@ -676,16 +602,6 @@ Read from Replica at t+50ms: might still return old value ← stale read window
 - **Using strong consistency for EVERYTHING** — unnecessary performance cost for analytics data
 - **Not handling conflict resolution** — just picking "eventual consistency" without designing how conflicts resolve leaves a dangerous gap
 - **Ignoring "read your own writes"** — the most common user-visible bug in eventually consistent systems
-
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "DynamoDB offers 'eventually consistent reads' and 'strongly consistent reads.' When would you use each within the same application?"
-- **Uber:** "Driver earnings data — driver's own balance view and fare history. Strong or eventual? Does your answer change if this is for auditing vs for real-time display?"
-- **Meta:** "When you post a photo on Instagram, you immediately see it. But your friend might not see it for a second. How does Instagram implement this 'read your own writes' pattern?"
-- **Google:** "Google uses Spanner for some systems and Bigtable for others. When would you choose Spanner's external consistency over Bigtable's eventual consistency?"
-- **Netflix:** "You added a movie to 'My List' on Netflix. You switch devices immediately. The movie isn't there. This is eventually consistent. How would you fix this, and what's the cost?"
 
 ---
 
@@ -871,22 +787,6 @@ HYBRID (Twitter's actual approach):
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're designing Twitter's home timeline. Push or pull? Why?"
-2. "Katy Perry has 150 million followers. What happens when she tweets in your push system?"
-3. "What is 'fan-out on write' and why is it problematic for celebrities?"
-4. "How does Twitter actually solve the celebrity problem? What's the hybrid approach?"
-5. "Push model requires writing to 1M inboxes. How long does that take? Is it synchronous or asynchronous?"
-6. "In a pull system, user follows 500 accounts. How many DB reads does one feed refresh trigger?"
-7. "How does the push model affect storage requirements? Calculate for Instagram at 500M posts/day."
-8. "What is 'inbox' storage in the push model? What database is typically used?"
-9. "What happens in a push system when a user has been offline for a week and comes back?"
-10. "How would you optimize the pull model for a user who follows 5,000 accounts?"
-11. "Explain the trade-off in terms of read:write ratio. Which is cheaper for social media?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "You're designing Twitter. User A has 150M followers. She tweets. How do you handle fan-out?"**
@@ -902,15 +802,6 @@ HYBRID (Twitter's actual approach):
 - **Not considering the asynchronous nature of push fan-out** — candidates often assume fan-out is synchronous (it's not; it's queued and eventually consistent)
 - **Ignoring storage costs of push** — same post in a million places; calculate before committing
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "You're designing Amazon product recommendations. The recommendation changes based on what you just viewed. Push the recommendation or pull it at page load?"
-- **Uber:** "You're designing surge pricing broadcasts. A surge starts in Bangalore. How do you notify the 5,000 drivers in the area? Push or pull?"
-- **Meta:** "Facebook's News Feed uses a push model for most content. How does the Newsfeed ranking (ML ranking of posts) interact with the pre-computed push inbox?"
-- **Google:** "Gmail uses push (IMAP IDLE / web push). What's the cost of maintaining 1 billion persistent connections for push notifications?"
-- **Netflix:** "New episode released. Push a notification to all 10M subscribers of a show. How do you architect the fan-out without overwhelming the notification infrastructure?"
 
 ---
 
@@ -1093,21 +984,6 @@ Client is NOT blocked. Service B failure doesn't affect the client response.
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're designing an image upload service. After upload, you resize to 5 different dimensions. Sync or async?"
-2. "What happens if your async consumer crashes? Do you lose messages?"
-3. "How do you inform the user when an async operation completes?"
-4. "What's 'at-least-once delivery' and how does it affect async consumers?"
-5. "You have a synchronous call chain: A → B → C → D. D is slow. What happens?"
-6. "What is a 'dead letter queue' and why do you need one?"
-7. "Async operations have no guaranteed ordering. When is this a problem?"
-8. "How do you implement a saga pattern using async messages for a distributed transaction?"
-9. "What's the difference between a message queue and an event stream for async communication?"
-10. "How do you handle the case where you process an async message twice (duplicate delivery)?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "You have a synchronous call chain A → B → C → D. D becomes slow. Walk me through the impact."**
@@ -1128,15 +1004,6 @@ Client is NOT blocked. Service B failure doesn't affect the client response.
 - **No timeout on synchronous calls** — default is often infinite wait; always set explicit timeouts
 - **Assuming async means eventually** — async doesn't mean slow; RabbitMQ/Kafka can process messages in milliseconds
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Order placement is synchronous (inventory check + payment auth). Notification emails are async. What if the async email service is down for 2 hours? How do you recover?"
-- **Uber:** "Driver location updates come in 60,000 times per second from 1M drivers. Synchronous DB write or async queue? Why?"
-- **Meta:** "When you post on Instagram, your post appears in 100M timelines. Is the fan-out sync or async? What's the acceptable delay?"
-- **Google:** "You send an email in Gmail. It's queued asynchronously. What does the 'Sent' status shown immediately to the user actually mean?"
-- **Netflix:** "You rate a movie 5 stars. This needs to update recommendations for 10 related users and update your recommendation model. How much of this is async?"
 
 ---
 
@@ -1322,23 +1189,6 @@ DB: price = ₹999  →  Update DB: price = ₹899  →  Cache still says ₹999
 
 ---
 
-## 8. Common Interview Questions
-
-1. "What is a cache stampede / thundering herd and how do you prevent it?"
-2. "How do you handle cache invalidation? When does your cache become stale?"
-3. "What's the difference between cache-aside, write-through, and write-behind?"
-4. "What is a TTL? How do you choose the right TTL for your cache?"
-5. "Your cache node fails. What happens to your system?"
-6. "You have a Redis cache in front of MySQL. You update a product price in MySQL. How does the cache reflect this?"
-7. "What is a 'hot key' problem in Redis and how do you handle it?"
-8. "What is LRU eviction? What happens when Redis hits its memory limit?"
-9. "How do you warm up a cache after a deployment?"
-10. "What's the difference between a cache and a CDN?"
-11. "When is adding a cache actually harmful?"
-12. "Explain the difference between distributed cache (Redis Cluster) and local in-process cache."
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "What is a cache stampede and how do you prevent it?"**
@@ -1360,16 +1210,6 @@ DB: price = ₹999  →  Update DB: price = ₹899  →  Cache still says ₹999
 - **Not monitoring cache hit rate** — if hit rate < 50%, your cache isn't helping
 - **Caching sensitive data inappropriately** — shared cache serving user-specific private data to wrong users
 - **Single Redis node with no replica** — Redis node failure = total cache loss = DB spike
-
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Product pages get 10M views/day. Product data changes 10x/day. What's your caching strategy and TTL?"
-- **Uber:** "Driver's current location updates every 4 seconds. Should you cache it? What's the TTL?"
-- **Meta:** "User's friend list is used on every page load. 200M DAU. Cache hit or DB read? What invalidates it?"
-- **Google:** "Google Search results for 'weather in Mumbai' — cached for how long? What event invalidates it?"
-- **Netflix:** "The list of movies a user has watched is used for recommendations. Should this be cached? What are the consistency requirements?"
 
 ---
 
@@ -1579,21 +1419,6 @@ MICROSERVICES:
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're designing a new e-commerce platform for a startup. Monolith or microservices? Why?"
-2. "What is the 'distributed monolith' anti-pattern? How do you avoid it?"
-3. "How do you handle database transactions that span two microservices?"
-4. "What is the Strangler Fig pattern? When would you use it?"
-5. "If microservices service A calls service B which calls service C and C is down, what happens?"
-6. "How do you debug a request that spans 10 microservices?"
-7. "What is 'data ownership' in microservices? Why can't services share a database?"
-8. "How does microservices complexity change the incident response process?"
-9. "At what team size does microservices start to pay off?"
-10. "What's Conway's Law? How does it relate to microservices?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "You're building a new product from scratch. 5 engineers. Monolith or microservices?"**
@@ -1614,15 +1439,6 @@ MICROSERVICES:
 - **Creating too many services** ("nanoservices") — one service per class/function creates absurd network overhead
 - **Underestimating operational overhead** — each service needs CI/CD, monitoring, alerting, logging, on-call rotation
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Amazon transitioned from a monolith to microservices. What triggered that transition? What was the hardest part?"
-- **Uber:** "Uber's original monolith was called 'God' — a single Python service. At what scale did it break? What were the first services extracted?"
-- **Meta:** "Facebook runs on a PHP monolith for much of its frontend. Why haven't they fully moved to microservices? What's the tradeoff they've made?"
-- **Google:** "Google's search is a massive monolith in many respects. How do they maintain velocity on a codebase that size?"
-- **Netflix:** "Netflix famously moved to microservices on AWS. What was the cost? They needed to invent Hystrix, Zuul, Eureka. Why was that necessary?"
 
 ---
 
@@ -1795,22 +1611,6 @@ COMBINED (each shard is replicated):
 
 ---
 
-## 8. Common Interview Questions
-
-1. "Your MySQL database primary is maxed out on writes. What do you do?"
-2. "What is a shard key? How do you choose one? What happens if you choose badly?"
-3. "What is the 'hotspot' problem in sharding?"
-4. "How do you handle a JOIN query when data is on two different shards?"
-5. "What is consistent hashing and why is it used in sharding?"
-6. "What happens if you need to add a new shard to an existing sharded system?"
-7. "Your sharded database has a shard that fails. What happens to data on that shard?"
-8. "How does Instagram shard its database? What's the shard key?"
-9. "Explain 'read replicas' vs 'sharding' — aren't both about distributing load?"
-10. "When would you combine replication AND sharding?"
-11. "What is 'rebalancing' in a sharded system? Why is it hard?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "How do you choose a shard key? What makes a bad shard key?"**
@@ -1830,16 +1630,6 @@ COMBINED (each shard is replicated):
 - **Not planning for resharding** — adding a shard to an existing sharded system is painful; plan for it early
 - **Forgetting to replicate shards** — a sharded but non-replicated system loses 1/N of data if any shard fails
 - **Assuming cross-shard queries are free** — scatter-gather queries are much slower than single-shard queries
-
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "DynamoDB partitions data automatically. What is the partition key? What happens if you have a 'hot partition'?"
-- **Uber:** "Uber's trip data is sharded by trip_id. But you need to query all trips for a specific driver. How do you handle this cross-shard query?"
-- **Meta:** "Facebook's messages are sharded by conversation_id. How do you load the inbox for a user (all their conversations from different shards)?"
-- **Google:** "Spanner uses range-based sharding internally called 'splits'. How does Spanner rebalance splits automatically? What triggers a split?"
-- **Netflix:** "User viewing history is sharded by user_id in Cassandra. When you add a new Cassandra node, what percentage of data moves? Why?"
 
 ---
 
@@ -2030,21 +1820,6 @@ One connection, two-way, zero latency, no repeated requests.
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're designing WhatsApp. How do you deliver messages in real-time to connected clients?"
-2. "What happens to a WebSocket connection when the user's mobile switches from WiFi to 4G?"
-3. "You have 1 million simultaneous WebSocket connections. How do you scale your WebSocket servers?"
-4. "What is Server-Sent Events (SSE) and how does it compare to WebSocket?"
-5. "In a WebSocket chat system, User A and User B are connected to different servers. How does Server A deliver User B's message to User B?"
-6. "Why doesn't polling work well for a live stock ticker updating 100 times per second?"
-7. "Your WebSocket server goes down. How do clients detect this and reconnect?"
-8. "How does HTTP/2 Server Push compare to WebSocket?"
-9. "What are the security implications of WebSocket? How do you prevent unauthorized connections?"
-10. "When would you use long polling instead of WebSocket?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "1 million users connected via WebSocket to your chat service. How do you scale?"**
@@ -2061,15 +1836,6 @@ One connection, two-way, zero latency, no repeated requests.
 - **Forgetting sticky sessions** — load balancer sends reconnect to different server; connection-level state lost
 - **Building WebSocket for infrequent updates** — checking for new emails once per hour doesn't need WebSocket
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Amazon product pages show real-time inventory ('Only 2 left!'). WebSocket or polling? At what update frequency does one become better than the other?"
-- **Uber:** "Uber's rider app shows the driver moving on a map, updating every 4 seconds. WebSocket or polling?"
-- **Meta:** "Facebook Messenger delivers messages. How does it handle the case where a user has the web app, mobile app, and tablet all open simultaneously?"
-- **Google:** "Google Docs shows your collaborators' cursors in real-time. How does this work at the data layer? WebSocket to what? How are changes merged?"
-- **Netflix:** "Netflix shows 'X people watching this right now' on some content. Is this real-time WebSocket or approximate polling? Which makes more sense?"
 
 ---
 
@@ -2264,21 +2030,6 @@ POST /graphql  Query:
 
 ---
 
-## 8. Common Interview Questions
-
-1. "You're building an API for a mobile app. REST or GraphQL? Why?"
-2. "What is the N+1 query problem in GraphQL? How do you solve it?"
-3. "How do you handle caching in a GraphQL API?"
-4. "What is DataLoader and why is it essential for production GraphQL?"
-5. "What happens if a client sends a GraphQL query that would fetch a billion records?"
-6. "How do you version a GraphQL API?"
-7. "What is schema stitching and federation in GraphQL?"
-8. "Compare REST over-fetching with GraphQL in the context of a mobile app."
-9. "Would you use GraphQL for a payment API? Why or why not?"
-10. "How does GitHub's GraphQL API improve over its REST v3 API?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "What is the N+1 problem in GraphQL and how do you solve it?"**
@@ -2295,15 +2046,6 @@ POST /graphql  Query:
 - **Treating GraphQL as a replacement for all REST endpoints** — file uploads, webhooks, streaming are REST-native
 - **Ignoring caching** — public APIs built with GraphQL lose CDN caching benefits; must implement custom Apollo-based caching
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Amazon's product detail page shows product info, reviews, seller info, inventory, and related products. REST would require 5 calls. Would GraphQL help here? What's the cost?"
-- **Uber:** "Uber's driver app needs: trip status, rider location, route, and payment estimate in one call. REST or GraphQL?"
-- **Meta:** "Facebook invented GraphQL. What specific problem were they solving with the original Facebook iOS app?"
-- **Google:** "YouTube's homepage shows personalized content, trending, subscriptions, ads. How would you design the API — one REST endpoint per section, or GraphQL?"
-- **Netflix:** "Netflix has web, iOS, Android, smart TV, and PlayStation clients. Each needs different amounts of the same data. How does GraphQL help here versus REST?"
 
 ---
 
@@ -2491,20 +2233,6 @@ Raw events → [Batch Layer (Spark)] → accurate historical reports
 - **Live leaderboards:** Gaming leaderboard that updates as scores change
 - **Event-driven microservices:** Order placed → inventory updated immediately
 
----
-
-## 8. Common Interview Questions
-
-1. "You're designing fraud detection for a payment system. Batch or stream? Why?"
-2. "What is the Lambda architecture? What problems does it solve?"
-3. "What is the Kappa architecture? When would you prefer it over Lambda?"
-4. "How does Kafka enable stream processing? What role does it play?"
-5. "What is 'late data' in stream processing? How do watermarks handle it?"
-6. "You're running a nightly batch job that takes 8 hours. The data is growing. What do you do?"
-7. "What is exactly-once semantics in stream processing and why is it hard?"
-8. "How do you reprocess historical data in a stream processing system?"
-9. "What's the difference between micro-batch (Spark Streaming) and true streaming (Flink)?"
-10. "You're building a reporting dashboard. Some metrics are real-time, some are daily aggregates. How do you architect this?"
 
 ---
 
@@ -2524,15 +2252,6 @@ Raw events → [Batch Layer (Spark)] → accurate historical reports
 - **Not handling late-arriving events** — events arriving 5 minutes late after the window closed are silently dropped
 - **Underestimating stream processing complexity** — teams often switch to "simpler" batch for complex aggregations
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Amazon processes millions of orders per day. Inventory updates are batch or stream? What about fraud detection?"
-- **Uber:** "Uber surge pricing uses stream processing to calculate supply/demand ratios. How does Uber handle the case where a location update event arrives 30 seconds late?"
-- **Meta:** "Facebook's 'people you may know' algorithm runs on your social graph. Batch or stream? What's the acceptable latency?"
-- **Google:** "Google Analytics shows real-time visitors on your website AND daily/monthly reports. Which parts are stream? Which are batch?"
-- **Netflix:** "Netflix recommendation engine. Stream processing of 'user just watched a movie' events, or batch processing of weekly viewing history? What does Netflix actually do?"
 
 ---
 
@@ -2727,21 +2446,6 @@ Horizontal scaling works perfectly.
 
 ---
 
-## 8. Common Interview Questions
-
-1. "Your database is struggling. Should you scale up or scale out?"
-2. "What does it mean for an application to be 'stateless'? Why does it matter for horizontal scaling?"
-3. "You've doubled your server size twice. CPU is still maxed. What do you do now?"
-4. "How does auto-scaling work? What metric do you use to trigger it?"
-5. "What is a load balancer and why is it required for horizontal scaling?"
-6. "What is session affinity (sticky sessions) and when do you need it?"
-7. "Your app stores user sessions in local memory. How do you horizontally scale it?"
-8. "What's the difference between scaling reads vs scaling writes in a database?"
-9. "You're told to design for 10x traffic. Walk me through your scaling approach."
-10. "What is an auto-scaling group? How does it interact with a load balancer?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "Your e-commerce app is seeing 10x traffic. Walk me through your scaling strategy."**
@@ -2758,15 +2462,6 @@ Horizontal scaling works perfectly.
 - **Not auto-scaling** — manually managing fleet size during traffic spikes is an on-call nightmare
 - **Ignoring the cost model** — horizontal scaling can be more expensive if not coupled with auto-scaling to downscale
 
----
-
-## 11. Follow-Up Questions (FAANG Style)
-
-- **Amazon:** "Amazon Black Friday sees 10-50x normal traffic for a few hours. How does their auto-scaling strategy differ from a startup's approach?"
-- **Uber:** "Uber's matching service runs on how many servers? How does horizontal scaling of the matching engine work when matching needs global state?"
-- **Meta:** "Facebook's web tier scales horizontally to hundreds of thousands of machines. What's their load balancing strategy?"
-- **Google:** "Google Search scales to millions of QPS. It's horizontally scaled. What made it possible to horizontally scale such a complex system?"
-- **Netflix:** "Netflix auto-scales for the evening traffic peak (8-11pm). How do they predict the scale-out threshold, and what's the risk of scaling too early or too late?"
 
 ---
 
@@ -2947,19 +2642,6 @@ Less Memory → Data moves lower → Higher Latency → Lower Cost
 
 ---
 
-## 8. Common Interview Questions
-
-1. "How much RAM does your Redis cluster need? How do you calculate it?"
-2. "What percentage of your dataset should you aim to fit in Redis cache?"
-3. "A Redis node runs out of memory. What happens? How do you configure eviction?"
-4. "What is the working set of a database? Why does it matter?"
-5. "Your database hit rate for buffer pool cache drops from 99% to 70%. What happened?"
-6. "How do you decide what data to put in Redis vs leave in the database?"
-7. "What's the cost trade-off between a large Redis cluster and a powerful database machine?"
-8. "What is 'hot data' and 'cold data'? How does this affect your storage architecture?"
-
----
-
 ## 9. Strong Interview Answers
 
 **Q: "How do you decide the size of your Redis cache?"**
@@ -3094,19 +2776,6 @@ The tension: batching increases throughput but adds queuing latency.
 │ Failure model       │ Batch fails → retry batch     │ Single op fails → retry op        │
 └────────────────────┴──────────────────────────────┴──────────────────────────────────┘
 ```
-
----
-
-## 6. Common Interview Questions
-
-1. "Your API processes 100 req/sec. You want to handle 10,000 req/sec. How?"
-2. "What is the relationship between throughput and latency under queue theory (Little's Law)?"
-3. "Why does adding more servers increase throughput but not always decrease latency?"
-4. "What is head-of-line blocking and how does it affect latency?"
-5. "How does HTTP/2 improve throughput and latency over HTTP/1.1?"
-6. "Your Kafka consumer is processing 1,000 messages/sec but each takes 100ms. What happens?"
-7. "What is 'backpressure' and why does it matter for throughput?"
-8. "How do databases batch writes for throughput while still guaranteeing durability?"
 
 ---
 
@@ -3261,16 +2930,6 @@ Reservoir Sampling (uniform random sample from stream):
 - **Cache deduplication:** Bloom filter for "already cached?" — false positive means rare unnecessary DB call
 - **Rate limiting:** Approximate rate limiter with Count-Min Sketch — occasional false positive is acceptable
 
----
-
-## 8. Common Interview Questions
-
-1. "How do you count the number of distinct users who visited your site today? You have 10 billion events."
-2. "What is HyperLogLog? How does it achieve approximate cardinality counting?"
-3. "You're designing a trending hashtag system. How do you find the top 10 in real-time?"
-4. "What is the error guarantee of a Count-Min Sketch?"
-5. "When would you use reservoir sampling instead of a full data analysis?"
-6. "Your product team asks for 'real-time unique visitor count.' What do you tell them?"
 
 ---
 
@@ -3410,19 +3069,6 @@ Each caches popular content; users always hit the nearest PoP.
 - **Internal tools:** Your internal HR system used by 50 employees in one office
 - **Latency-insensitive backend services:** Microservice-to-microservice calls stay in VPC
 - **Highly sensitive data:** Some compliance regimes limit which third parties can see data in transit
-
----
-
-## 8. Common Interview Questions
-
-1. "How does a CDN work? What happens on a cache miss?"
-2. "You update your website's CSS. How do you ensure users see the new version immediately?"
-3. "What content should you put on a CDN? What shouldn't you?"
-4. "How does a CDN help with DDoS protection?"
-5. "What is cache invalidation in a CDN? Why is it hard?"
-6. "What is the difference between a CDN edge cache and a CDN shield/mid-tier cache?"
-7. "How does Cloudflare's CDN differ from Amazon CloudFront's?"
-8. "Can you CDN an API response? Under what conditions?"
 
 ---
 
@@ -3588,21 +3234,6 @@ Replay: new service can read ALL past events from offset 0.
 - **Stream processing integration:** Flink/Spark Streaming consuming from Kafka
 - **Audit log:** Immutable, ordered log of all events in the system
 - **Companies:** LinkedIn (origin), Uber, Netflix, Airbnb — event-driven at scale
-
----
-
-## 8. Common Interview Questions
-
-1. "When would you choose Kafka over RabbitMQ? Give me a specific example."
-2. "What is consumer group offset management in Kafka? What happens if a consumer crashes?"
-3. "RabbitMQ deletes messages after consumption. What are the implications?"
-4. "How do you replay historical events with Kafka? Can you do this with RabbitMQ?"
-5. "Your system has 5 services that all need to react to 'order placed'. Kafka or RabbitMQ? Why?"
-6. "What is a Kafka consumer group? What happens to partitions if a consumer leaves the group?"
-7. "How do you handle poison messages (messages that keep causing consumer failures) in Kafka vs RabbitMQ?"
-8. "What is the difference between a message queue and an event log?"
-9. "When would Kafka's retention of messages be a problem?"
-10. "You're designing a system where you need to send a 'process this payment' task to exactly one worker. Kafka or RabbitMQ?"
 
 ---
 
@@ -3775,20 +3406,6 @@ But: if product name changes → must UPDATE all historical order rows too ← c
 - **High-traffic read endpoints:** Product page, user profile — denormalize into a pre-joined view
 - **Historical records:** Order receipt — embed product name/price at order time (they can change; receipt must be stable)
 
----
-
-## 8. Common Interview Questions
-
-1. "Your user profile page requires 5 SQL JOINs. How do you optimize this?"
-2. "What is a materialized view? How does it relate to denormalization?"
-3. "Product prices change. How do you handle historical order prices in a normalized schema?"
-4. "What is 'select N+1' problem and how does denormalization solve it?"
-5. "You're designing a NoSQL document store for an e-commerce product catalog. How do you model it?"
-6. "What is 'write amplification' in denormalized schemas?"
-7. "How does denormalization differ between MongoDB and a relational DB?"
-8. "When does denormalization in a SQL database make more sense than switching to NoSQL?"
-9. "What is CQRS and how does denormalization relate to it?"
-10. "Explain why a data warehouse schema (star schema) is denormalized."
 
 ---
 
