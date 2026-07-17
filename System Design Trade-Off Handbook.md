@@ -1,33 +1,4 @@
 # System Design Trade-Off Handbook
-## For Product-Based Company Interviews | Senior Engineer Level
-
----
-
-**Prepared for:** Yash | AI/GenAI Engineer transitioning to Product Company System Design Interviews
-**Purpose:** Master the WHY behind every architectural decision so you can defend your choices, handle follow-ups, and think like a Senior Engineer under interview pressure.
-
----
-
-## What's Inside
-
-18 complete trade-off analyses, each covering:
-1. Concept Overview (why interviewers ask)
-2. Visual ASCII Diagram
-3. Option A — Deep dive
-4. Option B — Deep dive
-5. Side-by-Side Comparison Table
-6. When to Choose Each (with company examples)
-7. 10-15 Common Interview Questions
-8. Strong Senior-Level Answers
-9. Common Mistakes candidates make
-10. FAANG-style Follow-Up Questions
-11. Real System Design Examples (WhatsApp, Instagram, Uber, YouTube, Netflix, Ticketmaster, Twitter, Dropbox, URL Shortener)
-12. Scaling Journey (Small → Medium → Large → Hyperscale)
-13. Decision Framework
-
-**Plus:** A complete "Relationships Between Trade-Offs" section showing how decisions cascade and interconnect — the Master Trade-Off Map.
-
----
 
 ## All 18 Trade-Offs
 
