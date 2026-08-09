@@ -623,6 +623,110 @@ That's a very powerful system-design principle.
 
 ---
 
+# The GFS Mental Model You Should Memorize
+
+For your Product-Based Company System Design preparation, I would reduce this entire paper to this diagram:
+
+```
+                     ┌─────────────────────┐
+                     │       MASTER        │
+                     │                     │
+                     │ Namespace           │
+                     │ File → Chunk        │
+                     │ Chunk locations     │
+                     │ Lease management    │
+                     │ Replication / GC    │
+                     └──────────┬──────────┘
+                                │
+                         CONTROL PLANE
+                                │
+               ┌────────────────┴────────────────┐
+               │                                 │
+               ▼                                 ▼
+        ┌──────────────┐                  ┌──────────────┐
+        │ Chunkserver  │                  │ Chunkserver  │
+        │   Primary    │                  │  Secondary   │
+        └──────┬───────┘                  └──────┬───────┘
+               │                                 │
+               └──────────────┬──────────────────┘
+                              │
+                        DATA PLANE
+                              │
+                         GFS CLIENT
+                              │
+                         Application
+
+```
+
+And remember these 10 keywords:
+64 MB chunks $\rightarrow$ $3\times$ replication $\rightarrow$ centralized metadata $\rightarrow$ direct data path $\rightarrow$ leases $\rightarrow$ primary replica $\rightarrow$ relaxed consistency $\rightarrow$ atomic record append $\rightarrow$ checksums $\rightarrow$ automatic re-replication
+
+If you can explain those ten concepts and, more importantly, why each exists, you can extract a surprising amount of System Design knowledge from GFS.
+
+---
+
+# Understanding GFS: The National Library Analogy
+
+To understand the Google File System (GFS) architecture, let's use a relatable real-life analogy: A Massive Public Library System with a Head Librarian and Storage Warehouses.
+
+Imagine you want to read, copy, or update a massive encyclopedia series. Here is how GFS handles that task.
+
+---
+
+## The Real-Life Analogy: The National Library
+
+* **The Master (Head Librarian):** Doesn’t store the actual books. Instead, they sit at the front desk with a massive digital catalog. They know where every chapter (chunk) of every book is located across all warehouses, who is allowed to edit it (lease management), and which shelves are empty (garbage collection).
+* **The Chunkservers (Storage Warehouses):** These are physical warehouses scattered across the city. They store the actual pieces of data (chunks) in standard filing cabinets.
+* **Primary Chunkserver:** The manager of a specific warehouse chosen to coordinate updates.
+* **Secondary Chunkserver:** Backup warehouses that keep exact duplicate copies to prevent data loss.
+
+
+* **The GFS Client (The Library Assistant / Courier):** Takes your request, talks to the Master to get directions, and then goes directly to the warehouses to fetch or drop off the data.
+* **The Application (You):** The end-user who just wants to read or write data without worrying about how it's stored.
+
+---
+
+## Breaking Down the Architecture Layers
+
+### 1. Control Plane (The Master Node)
+
+* **What it does:** Manages metadata, directory structures (namespaces), maps files to specific chunks, tracks chunk locations, and handles system health (leases, replication, garbage collection).
+* **Real-Life Action:** You walk into the library and ask the Head Librarian (Master) for “Volume 3 of the History of Science.”
+
+The Librarian looks at their computer system (Namespace / File $\rightarrow$ Chunk map) and tells you:
+
+> "Volume 3 is split into 3 parts (Chunks). Part 1 is stored in Warehouse A and Warehouse B."
+
+Crucially, the Librarian never touches the actual book pages. They only deal with metadata (the directions). This keeps the Master lightweight and fast.
+
+### 2. Data Plane (Chunkservers: Primary & Secondary)
+
+* **What it does:** Stores the actual file data split into large chunks (typically 64 MB in GFS). Data flows directly between clients and chunkservers, bypassing the Master.
+* **Real-Life Action:** Armed with the map from the Master, your Courier (GFS Client) goes straight to the storage warehouses.
+
+If you want to update a page:
+
+* The Master assigns one warehouse to be the **Primary Chunkserver** (the lead warehouse for that task).
+* The Primary coordinates with the **Secondary Chunkservers** to ensure everyone updates their copy identically and in the correct order (Lease Management).
+* The data flows directly from the client to the warehouses (Data Plane), preventing the Head Librarian from getting overwhelmed by heavy boxes of books.
+
+### 3. GFS Client & Application
+
+* **What it does:** Applications talk to the GFS Client library. The client handles the complex communication—asking the Master for metadata first, then talking directly to the chunkservers for the data payload.
+* **Real-Life Action:** You (The Application) just hand your request to your Assistant (GFS Client). The assistant does all the heavy lifting of running back and forth between the front desk (Master) and the warehouses (Chunkservers), handing you back the final result seamlessly.
+
+---
+
+## One final interviewer-level insight
+
+The deepest lesson of GFS isn't "use a master and chunkservers." It's this:
+
+> Start with workload assumptions, identify what must be strongly coordinated, and aggressively remove coordination from everything else.
+
+That principle transfers directly to modern systems such as distributed databases, object storage, Kafka-like systems, feature stores, vector databases, distributed training infrastructure, and ML/AI data pipelines.
+
+---
+
 # Follow-up Deep-Dive Questions
 
 ## Question 1 — "Why doesn't the single master become the bottleneck?"
@@ -683,54 +787,3 @@ The master itself is replicated, while one master process remains responsible fo
 
 You don't need consensus between every storage node for every byte written.
 
----
-
-# The GFS Mental Model You Should Memorize
-
-For your Product-Based Company System Design preparation, I would reduce this entire paper to this diagram:
-
-```
-                     ┌─────────────────────┐
-                     │       MASTER        │
-                     │                     │
-                     │ Namespace           │
-                     │ File → Chunk        │
-                     │ Chunk locations     │
-                     │ Lease management    │
-                     │ Replication / GC    │
-                     └──────────┬──────────┘
-                                │
-                         CONTROL PLANE
-                                │
-               ┌────────────────┴────────────────┐
-               │                                 │
-               ▼                                 ▼
-        ┌──────────────┐                  ┌──────────────┐
-        │ Chunkserver  │                  │ Chunkserver  │
-        │   Primary    │                  │  Secondary   │
-        └──────┬───────┘                  └──────┬───────┘
-               │                                 │
-               └──────────────┬──────────────────┘
-                              │
-                        DATA PLANE
-                              │
-                         GFS CLIENT
-                              │
-                         Application
-
-```
-
-And remember these 10 keywords:
-64 MB chunks $\rightarrow$ $3\times$ replication $\rightarrow$ centralized metadata $\rightarrow$ direct data path $\rightarrow$ leases $\rightarrow$ primary replica $\rightarrow$ relaxed consistency $\rightarrow$ atomic record append $\rightarrow$ checksums $\rightarrow$ automatic re-replication
-
-If you can explain those ten concepts and, more importantly, why each exists, you can extract a surprising amount of System Design knowledge from GFS.
-
----
-
-## One final interviewer-level insight
-
-The deepest lesson of GFS isn't "use a master and chunkservers." It's this:
-
-> Start with workload assumptions, identify what must be strongly coordinated, and aggressively remove coordination from everything else.
-
-That principle transfers directly to modern systems such as distributed databases, object storage, Kafka-like systems, feature stores, vector databases, distributed training infrastructure, and ML/AI data pipelines.
