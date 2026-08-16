@@ -54,7 +54,9 @@ The problem reduces to a continuous operational chain:
 
 $$\text{Failures are unavoidable} \longrightarrow \text{Waiting for certainty reduces availability} \longrightarrow \text{Allow operations during failures}$$
 
+
 $$\longrightarrow \text{Replicas diverge} \longrightarrow \text{Need versioning \& conflict detection} \longrightarrow \text{Need reconciliation}$$
+
 
 $$\longrightarrow \text{Need background replica repair} \longrightarrow \text{Maintain 99.9th percentile SLA}$$
 
