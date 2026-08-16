@@ -1,4 +1,4 @@
-# Dynamo: Amazon’s Highly Available Key-value Store - Deep System Design Analysis
+# Dynamo: Amazon’s Highly Available Key-value Store
 
 ---
 
