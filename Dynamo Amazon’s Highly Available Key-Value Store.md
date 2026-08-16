@@ -52,13 +52,11 @@ They did not require joins, relational schemas, multi-item transactions, or comp
 
 The problem reduces to a continuous operational chain:
 
-$$\text{Failures are unavoidable} \longrightarrow \text{Waiting for certainty reduces availability} \longrightarrow \text{Allow operations during failures}$$
+Failures are unavoidable -> Waiting for certainty reduces availability -> Allow operations during failures
 
+-> Replicas diverge} -> Need versioning \& conflict detection -> Need reconciliation
 
-$$\longrightarrow \text{Replicas diverge} \longrightarrow \text{Need versioning \& conflict detection} \longrightarrow \text{Need reconciliation}$$
-
-
-$$\longrightarrow \text{Need background replica repair} \longrightarrow \text{Maintain 99.9th percentile SLA}$$
+-> Need background replica repair -> Maintain 99.9th percentile SLA
 
 ---
 
