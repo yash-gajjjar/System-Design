@@ -44,7 +44,8 @@ The paper specifically describes how an existing master-election design could be
 
 Chubby deliberately makes the following trade-off:
 
-$$\begin{aligned} &\text{\textbf{Prioritized:}} && \text{Reliability, Availability, Simplicity} \\ &\text{\textbf{Secondary:}} && \text{Performance (Throughput \& Latency on Uncached Ops)} \end{aligned}$$
+Prioritized: Reliability, Availability, Simplicity 
+Secondary: Throughput & Latency on Uncached Ops
 
 This design is fundamentally different from a high-performance distributed datastore. Chubby's database is intentionally small, its files are small, and it does not aim for high throughput or low latency on uncached operations. That structural constraint is precisely what enables the rest of the architecture.
 
