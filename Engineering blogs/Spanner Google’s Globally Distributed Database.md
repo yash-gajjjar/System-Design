@@ -1,9 +1,3 @@
-Absolutely. I reviewed the **GFS** and **MapReduce** documents specifically for their structure, depth, terminology, architecture diagrams, interview-oriented explanations, trade-off treatment, and the way they turn the original paper into practical System Design notes.
-
-For **Spanner**, I’ll follow the same pattern rather than simply summarizing the PDF: start from the engineering problem → establish scale → reconstruct the architecture → walk through the important flows → explain *why* each component exists → expose the trade-offs → finish with interview-ready mental models and Principal-level questions.
-
-Below is the Spanner version, grounded **only in the attached Spanner paper**.
-
 # Spanner: Google’s Globally Distributed Database
 
 ---
