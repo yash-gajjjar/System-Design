@@ -298,17 +298,17 @@ MODERN SOLUTION: Use monotonic clocks where possible.
 ## 7. Comparison Table
 
 ```
-┌──────────────────┬──────────┬────────────┬──────────────┬──────────────────┬──────────────┐
-│ Approach          │ Globally  │ Time-       │ Throughput   │ Coordination     │ Size         │
-│                  │ Unique?   │ Sortable?   │              │ Required?        │              │
-├──────────────────┼──────────┼────────────┼──────────────┼──────────────────┼──────────────┤
-│ UUID v4           │ Yes ✅    │ No ❌       │ Unlimited    │ None ✅          │ 128-bit ❌   │
-│ UUID v7           │ Yes ✅    │ Yes ✅      │ Unlimited    │ None ✅          │ 128-bit ❌   │
-│ Twitter Snowflake │ Yes ✅    │ Yes ✅      │ 4M+/sec/node │ Machine ID assign│ 64-bit ✅    │
-│ ULID              │ Yes ✅    │ Yes ✅      │ Unlimited    │ None ✅          │ 128-bit ❌   │
-│ Ticket Server     │ Yes ✅    │ Yes ✅      │ Low (SPOF)   │ Central DB ❌    │ 64-bit ✅    │
-│ DB AUTO_INCREMENT │ Yes ✅    │ Yes ✅      │ Low (SPOF)   │ Central DB ❌    │ 64-bit ✅    │
-└──────────────────┴──────────┴────────────┴──────────────┴──────────────────┴──────────────┘
+┌───────────────────┬──────────┬────────────┬──────────────┬──────────────────┬──────────────┐
+│ Approach          │ Globally │ Time-      │ Throughput   │ Coordination     │ Size         │
+│                   │ Unique?  │ Sortable?  │              │ Required?        │              │
+├───────────────────┼──────────┼────────────┼──────────────┼──────────────────┼──────────────┤
+│ UUID v4           │ Yes ✅   │ No ❌     │ Unlimited    │ None ✅          │ 128-bit ❌  │
+│ UUID v7           │ Yes ✅   │ Yes ✅    │ Unlimited    │ None ✅          │ 128-bit ❌  │
+│ Twitter Snowflake │ Yes ✅   │ Yes ✅    │ 4M+/sec/node │ Machine ID assign │ 64-bit ✅   │
+│ ULID              │ Yes ✅   │ Yes ✅    │ Unlimited    │ None ✅          │ 128-bit ❌  │
+│ Ticket Server     │ Yes ✅   │ Yes ✅    │ Low (SPOF)   │ Central DB ❌    │ 64-bit ✅   │
+│ DB AUTO_INCREMENT │ Yes ✅   │ Yes ✅    │ Low (SPOF)   │ Central DB ❌    │ 64-bit ✅   │
+└───────────────────┴──────────┴────────────┴──────────────┴──────────────────┴──────────────┘
 
 WINNER FOR LARGE-SCALE DISTRIBUTED SYSTEMS: Twitter Snowflake
   64-bit, time-sortable, massively scalable, minimal coordination.
