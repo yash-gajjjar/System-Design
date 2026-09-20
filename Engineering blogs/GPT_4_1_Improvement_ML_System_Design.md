@@ -4,7 +4,7 @@ The OpenAI article, dated **April 14, 2025**, introduces the **GPT-4.1 model fam
 
 The article explicitly frames real-world utility around three major bottlenecks:
 
-| ChallengeWhat GPT-4.1 addresses |                                                                                                                                       |
+| Challenge                       |                           What GPT-4.1 addresses                                                                                      |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | Coding reliability              | Repository exploration, code completion, code diffs, fewer unnecessary edits, frontend generation, tool usage                         |
 | Instruction reliability         | Better compliance with formatting, ordering, negative constraints, content requirements, ranking and uncertainty-related instructions |
@@ -18,7 +18,7 @@ The article explicitly says the models were optimized through **developer collab
 
 The most important scale numbers are:
 
-| MetricArticle value                       |                                                                  |
+| Metric                                    |                Article value                                     |
 | ----------------------------------------- | ---------------------------------------------------------------- |
 | Maximum context window                    | **1 million tokens**                                             |
 | Previous GPT-4o context cited             | 128K tokens                                                      |
@@ -469,7 +469,7 @@ The article says mini reduces latency by nearly half relative to GPT-4o and cost
 
 The 1M-token context is a major capability advantage, but the article openly exposes the serving cost:
 
-| ContextApprox. GPT-4.1 TTFT |          |
+| ContextApprox.              | GPT-4.1 TTFT |
 | --------------------------- | -------- |
 | 128K                        | \~15 sec |
 | 1M                          | \~60 sec |
@@ -664,7 +664,7 @@ The article does **not** document production retry policies, fallback models, au
 
 The article gives the following prices per 1M tokens:
 
-| ModelInputCached InputOutputBlended |       |        |       |       |
+| Model                               | Input | CachedInput |  Output | Blended |
 | ----------------------------------- | ----- | ------ | ----- | ----- |
 | GPT-4.1                             | $2.00 | $0.50  | $8.00 | $1.84 |
 | GPT-4.1 mini                        | $0.40 | $0.10  | $1.60 | $0.42 |
@@ -698,7 +698,7 @@ The article's appendix compares GPT-4.1, mini and nano against GPT-4o, GPT-4o mi
 
 ### Academic knowledge
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |       |       |       |       |       |       |       |       |
+| Benchmark                                                 |GPT-4.1| Mini  |Nano   |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | --------------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | AIME '24                                                  | 48.1% | 49.6% | 29.4% | 13.1% | 8.6%  | 74.3% | 87.3% | 36.7% |
 | GPQA Diamond                                              | 66.3% | 65.0% | 50.3% | 46.0% | 40.2% | 75.7% | 77.2% | 69.5% |
@@ -709,7 +709,7 @@ The article notes that its GPQA implementation uses model-based answer extractio
 
 ### Coding
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |       |       |      |       |      |       |       |       |
+| Benchmark                                                 |GPT-4.1| Mini  |Nano   |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | --------------------------------------------------------- | ----- | ----- | ---- | ----- | ---- | ----- | ----- | ----- |
 | SWE-bench Verified                                        | 54.6% | 23.6% | –    | 33.2% | 8.7% | 41.0% | 49.3% | 38.0% |
 | Aider polyglot — whole                                    | 51.6% | 34.7% | 9.8% | 30.7% | 3.6% | 64.6% | 66.7% | –     |
@@ -717,7 +717,7 @@ The article notes that its GPQA implementation uses model-based answer extractio
 
 SWE-Lancer results are also reported in dollar terms:
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |               |               |              |               |               |               |              |               |
+| Benchmark                                                 |GPT-4.1        | Mini          |Nano          |GPT-4o         | GPT-4o mini   | o1            | o3-mini      | GPT-4.5 |
 | --------------------------------------------------------- | ------------- | ------------- | ------------ | ------------- | ------------- | ------------- | ------------ | ------------- |
 | SWE-Lancer                                                | $176K / 35.1% | $165K / 33.0% | $77K / 15.3% | $163K / 32.6% | $116K / 23.1% | $160K / 32.1% | $90K / 18.0% | $186K / 37.3% |
 | IC-Diamond                                                | $34K / 14.4%  | $31K / 13.1%  | $9K / 3.7%   | $29K / 12.4%  | $11K / 4.8%   | $29K / 9.7%   | $17K / 7.4%  | $41K / 17.4%  |
@@ -726,7 +726,7 @@ The article notes that 23/500 SWE-bench tasks were omitted because they could no
 
 ### Instruction following
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |       |       |       |       |       |       |       |       |
+| Benchmark                                                 |GPT-4.1| Mini  |Nano   |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | --------------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | Internal API instruction following — hard                 | 49.1% | 45.1% | 31.6% | 29.2% | 27.2% | 51.3% | 50.0% | 54.0% |
 | MultiChallenge                                            | 38.3% | 35.8% | 15.0% | 27.8% | 20.3% | 44.9% | 39.9% | 43.8% |
@@ -739,7 +739,7 @@ The article specifically cautions that the default MultiChallenge grader can mis
 
 ### Long-context evaluation
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |       |       |       |       |       |       |       |       |
+| Benchmark                                                 |GPT-4.1| Mini  |Nano   |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | --------------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | MRCR — 2 needle / 128K                                    | 57.2% | 47.2% | 36.6% | 31.9% | 24.5% | 22.1% | 18.7% | 38.5% |
 | MRCR — 2 needle / 1M                                      | 46.3% | 33.3% | 12.0% | –     | –     | –     | –     | –     |
@@ -752,7 +752,7 @@ The article specifically cautions that the default MultiChallenge grader can mis
 
 ### Vision
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1GPT-4.5 |       |       |       |       |       |       |       |
+| Benchmark                                          |GPT-4.1| Mini  |Nano   |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | -------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | MMMU                                               | 74.8% | 72.7% | 55.4% | 68.7% | 56.3% | 77.6% | 75.2% |
 | MathVista                                          | 72.2% | 73.1% | 56.2% | 61.4% | 56.5% | 71.8% | 72.3% |
@@ -763,7 +763,7 @@ The article specifically cautions that the default MultiChallenge grader can mis
 
 ### Function calling
 
-| BenchmarkGPT-4.1MiniNanoGPT-4oGPT-4o minio1o3-miniGPT-4.5 |                 |                 |                 |       |       |       |       |       |
+| Benchmark                                                 |GPT-4.1          | Mini            |Nano             |GPT-4o | GPT-4o mini| o1 | o3-mini| GPT-4.5 |
 | --------------------------------------------------------- | --------------- | --------------- | --------------- | ----- | ----- | ----- | ----- | ----- |
 | ComplexFuncBench                                          | 65.5%           | 49.3%           | 5.7%            | 66.5% | 38.6% | 47.6% | 17.6% | 63.0% |
 | Tau-bench airline                                         | 49.4%           | 36.0%           | 14.0%           | 42.8% | 22.0% | 50.0% | 32.4% | 50.0% |
@@ -829,7 +829,7 @@ This is strongly supported by the article's multiple evaluation families, partne
 
 ## The five biggest MLSD lessons from this article
 
-| Interview conceptGPT-4.1 article evidenceDesign lesson |                                                            |                                                                              |
+| Interview concept                                      |        GPT-4.1 article evidence                            |                        Design lesson                               |
 | ------------------------------------------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | **Model tiering**                                      | GPT-4.1 / mini / nano                                      | Match model capability to workload                                           |
 | **Context engineering**                                | Up to 1M tokens + MRCR + Graphwalks                        | Context capacity alone isn't sufficient; retrieval/reasoning quality matters |
